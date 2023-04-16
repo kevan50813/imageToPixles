@@ -2,32 +2,44 @@ from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
 
-
-
+'''
 def pixleateImage(img):
-    small_img=img.resize((8,8),Image.BILINEAR)
-    return small_img
+    height, width = img.shape[:2]
 
-def imageToSketch():
-    img=cv2.imread('photo of me.PNG')
-    grey_img=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    invert_img=cv2.bitwise_not(grey_img)
-    blur_img=cv2.GaussianBlur(invert_img, (111,111),0)
-    invblur_img=cv2.bitwise_not(blur_img)
-    sketch_img=cv2.divide(grey_img,invblur_img, scale=256.0)
+    temp = cv2.resize(input, (8, 8), interpolation=cv2.INTER_LINEAR)
+    small_img=cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
+    return small_img
+'''
+
+def imageToSketch(img):
+    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img_invert = cv2.bitwise_not(img_gray)
+    img_smoothing = cv2.GaussianBlur(img_invert, (21, 21),sigmaX=0, sigmaY=0)
+    sketch_img = cv2.divide(img_gray, 255 - img_smoothing, scale=255)
     return sketch_img
 
+
 def displayImages():
-    img=Image.open('photo of me.PNG')
-    small_img=pixleateImage(img)
-    sketch_img=imageToSketch()
+    img=cv2.imread('photo of me.PNG')
+    img= cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+  #  small_img = pixleateImage(img)
+    sketch_img = imageToSketch(img)
 
-    f, axarr = plt.subplots(2,2)
-    axarr[0,0].imshow(img)
+    plt.figure(figsize=(20,20))
+    plt.subplot(1,5,1)
+    plt.title("Original Image")
+    plt.imshow(img)
+    plt.axis("off")
 
-    axarr[0,1].imshow(small_img)
-    
-    axarr[1,0].imshow(sketch_img)
+    plt.subplot(1,5,2)
+    plt.title("Pixleated Image")
+    #plt.imshow(small_img)
+    plt.axis("off")
+
+    plt.subplot(1,5,3)
+    plt.title("sketch Image")
+    plt.imshow(sketch_img,cmap="gray",vmin=0,vmax=255)
+    plt.axis("off")
 
     plt.show()
 
