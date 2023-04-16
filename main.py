@@ -1,15 +1,14 @@
 from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
+import numpy as np
 
-'''
 def pixleateImage(img):
     height, width = img.shape[:2]
 
-    temp = cv2.resize(input, (8, 8), interpolation=cv2.INTER_LINEAR)
+    temp = cv2.resize(img, (8, 8), interpolation=cv2.INTER_LINEAR)
     small_img=cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
     return small_img
-'''
 
 def imageToSketch(img):
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -22,7 +21,7 @@ def imageToSketch(img):
 def displayImages():
     img=cv2.imread('photo of me.PNG')
     img= cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-  #  small_img = pixleateImage(img)
+    small_img = pixleateImage(img)
     sketch_img = imageToSketch(img)
 
     plt.figure(figsize=(20,20))
@@ -33,7 +32,7 @@ def displayImages():
 
     plt.subplot(1,5,2)
     plt.title("Pixleated Image")
-    #plt.imshow(small_img)
+    plt.imshow(small_img)
     plt.axis("off")
 
     plt.subplot(1,5,3)
