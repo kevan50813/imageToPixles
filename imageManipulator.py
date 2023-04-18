@@ -2,14 +2,12 @@ from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-import pixleate as px
 
 def pixleateImage(img):
     height, width = img.shape[:2]
     w,h=(32,32)
     temp = cv2.resize(img, (w, h), interpolation=cv2.INTER_LINEAR)
-    small_img=cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
-    pixel_img =px.kMeansImage(small_img,5)
+    pixel_img=cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
     return pixel_img
 
 def imageToSketch(img):
