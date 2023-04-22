@@ -43,8 +43,8 @@ def comicImage(img):
     return cartoon
 
 
-def displayImages():
-    img=cv2.imread('images.jpg')
+def displayImages(path):
+    img=cv2.imread(path)
     img= cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     pixel_img  = pixleateImage(img)
     sketch_img = imageToSketch(img)

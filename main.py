@@ -1,3 +1,5 @@
 import imageManipulator as im
 
-im.displayImages()
+
+imgFile = 'photo of me.PNG'
+im.displayImages(imgFile)
