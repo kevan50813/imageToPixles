@@ -2,6 +2,7 @@ from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
+import tempfile
 
 
 def color_quantization(img, k):
@@ -43,13 +44,13 @@ def comicImage(img):
     return cartoon
 
 
-def displayImages(path):
+def trasnformImages(path):
     img=cv2.imread(path)
     img= cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     pixel_img  = pixleateImage(img)
     sketch_img = imageToSketch(img)
     cartoon_img = comicImage(img)
-
+    
     plt.figure(figsize=(20,20))
     plt.subplot(1,5,1)
     plt.title("Original Image")
