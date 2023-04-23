@@ -59,9 +59,9 @@ while True:
             window["-TOUT-"].update(filename)
             window["-IMAGE-"].update(filename=filename)
             images = im.trasnformImages(filename)
-            window["-IMAGEPIXLEATED-"].update(images[0])
-            window["-IMAGECARTOON-"].update(images[1])
-            window["-IMAGESKETECH-"].update(images[2])
+            window["-IMAGEPIXLEATED-"].update(filename="pixel.png")
+            window["-IMAGECARTOON-"].update(filename="sketch.png")
+            window["-IMAGESKETECH-"].update(filename="cartoon.png")
         except:
             pass
 
@@ -69,6 +69,4 @@ while True:
         break
 
 window.close()
-
-
-#im.displayImages(imgFile)
+im.cleanup()

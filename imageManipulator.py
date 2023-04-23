@@ -2,8 +2,7 @@ from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-import tempfile
-
+import os
 
 def color_quantization(img, k):
 # Transform the image
@@ -46,11 +45,29 @@ def comicImage(img):
 
 def trasnformImages(path):
     img=cv2.imread(path)
+    pixel_img  = pixleateImage(img)
+    cartoon_img = comicImage(img)
+    img= cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+    sketch_img = imageToSketch(img)
+
+    cv2.imwrite("pixel.png", pixel_img) 
+    cv2.imwrite("sketch.png", sketch_img) 
+    cv2.imwrite("cartoon.png", cartoon_img) 
+  
+def cleanup():
+    os.remove("pixel.png")
+    os.remove("sketch.png")
+    os.remove("cartoon.png")
+  
+def matlabdipaly(path):
+    
+    img=cv2.imread(path)
     img= cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     pixel_img  = pixleateImage(img)
     sketch_img = imageToSketch(img)
     cartoon_img = comicImage(img)
-    
+
+
     plt.figure(figsize=(20,20))
     plt.subplot(1,5,1)
     plt.title("Original Image")
