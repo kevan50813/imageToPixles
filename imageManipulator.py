@@ -18,6 +18,7 @@ def color_quantization(img, k):
   result = result.reshape(img.shape)
   return result
 
+#pixlates images
 def pixleateImage(img):
     height, width = img.shape[:2]
     w,h=(32,32)
@@ -25,6 +26,7 @@ def pixleateImage(img):
     pixel_img=cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
     return pixel_img
 
+#creates an image sketch
 def imageToSketch(img):
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img_invert = cv2.bitwise_not(img_gray)
@@ -32,6 +34,7 @@ def imageToSketch(img):
     sketch_img = cv2.divide(img_gray, 255 - img_smoothing, scale=255)
     return sketch_img
 
+#makes a comic image
 def comicImage(img):
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     gray_blur = cv2.medianBlur(img_gray, 7)
@@ -58,7 +61,8 @@ def cleanup():
     os.remove("pixel.png")
     os.remove("sketch.png")
     os.remove("cartoon.png")
-  
+
+#displays an image on a malap plot for convience
 def matlabdipaly(path):
     
     img=cv2.imread(path)

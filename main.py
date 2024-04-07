@@ -51,7 +51,7 @@ while True:
             and f.lower().endswith((".png", ".gif", ".jpeg"))
         ]
         window["-FILE LIST-"].update(fnames)
-    elif event == "-FILE LIST-":  # A file was chosen from the listbox
+    elif event == "-FILE LIST-":  # A file was chosen from the list box
         try:
             filename = os.path.join(
                 values["-FOLDER-"], values["-FILE LIST-"][0]
